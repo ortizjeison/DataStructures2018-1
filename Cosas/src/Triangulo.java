@@ -1,8 +1,8 @@
 
 public class Triangulo {
-
+	
 	public double a,b,c;
-
+	
 	public Triangulo(double a, double b, double c) throws Desigualdad {
 		if(a+b>c && a+c>b && b+c>a) {
 			this.a = a;
@@ -12,7 +12,7 @@ public class Triangulo {
 			throw new Desigualdad();
 		}
 	}
-	
+	 
 	public double perimetro() {
 		return a+b+c;
 	}
@@ -41,3 +41,6 @@ public class Triangulo {
 		}
 	}
 }
+
+class Desigualdad extends Exception {}
+
