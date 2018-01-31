@@ -3,10 +3,14 @@ public class Triangulo {
 
 	public double a,b,c;
 
-	public Triangulo(double a, double b, double c) {
-		this.a = a;
-		this.b = b;
-		this.c = c;
+	public Triangulo(double a, double b, double c) throws Desigualdad {
+		if(a+b>c && a+c>b && b+c>a) {
+			this.a = a;
+			this.b = b;
+			this.c = c;			
+		}else {
+			throw new Desigualdad();
+		}
 	}
 	
 	public double perimetro() {
@@ -27,8 +31,13 @@ public class Triangulo {
 	}
 	
 	public static void main(String[] args) {
-		Triangulo t1 = new Triangulo(3,2,2);
-		System.out.println(t1.area());
+		
+		try {
+			Triangulo t1 = new Triangulo(3,1,1);
+			System.out.println(t1.area());
+		} catch (Desigualdad e) {
+			// TODO Auto-generated catch block
+			System.out.println("No es un triangulo");
+		}
 	}
-
 }
