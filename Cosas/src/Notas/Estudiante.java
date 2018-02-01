@@ -56,7 +56,7 @@ public class Estudiante {
 			}
 			return sum/i;			
 		}else 
-			System.out.println("No se puede hayar el promedio");
+			System.out.println("No se puede hallar el promedio");
 			return -1;
 	}
 	//Buscar mayor/ menor nota
