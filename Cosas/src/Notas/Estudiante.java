@@ -89,16 +89,12 @@ public class Estudiante {
 			}
 			notas[i][notas[i].length-1] = nota;		
 		}else
-			throw new Exception("volvete serio");
+			throw new Exception("error");
 	}
 	
-	public void addNota(String s, double []nota) {
+	public void addNota(String s, double []nota) throws Exception {
 		for(double n:nota) {
-			try {
 				addNota(s,n);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
 		}
 	}
 	
@@ -123,8 +119,12 @@ public class Estudiante {
 		}
 		//System.out.println(e1.promMateria("a"));
 		
-		double [] noticas = {-2,2,2,2};
-		e1.addNota("b", noticas);		
+		double [] noticas = {2,2,2,2};
+		try {
+			e1.addNota("b", noticas);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}		
 		System.out.println(e1.promMateria("b"));
 	}
 }
