@@ -36,11 +36,15 @@ public class Triangulo {
 			Triangulo t1 = new Triangulo(3,1,1);
 			System.out.println(t1.area());
 		} catch (Desigualdad e) {
-			// TODO Auto-generated catch block
-			System.out.println("No es un triangulo");
+			System.out.println(e.getMessage());
 		}
 	}
 }
 
-class Desigualdad extends Exception {}
+class Desigualdad extends Exception {
+	
+	public Desigualdad() {
+		super("no es un triángulo");
+	}
+}
 

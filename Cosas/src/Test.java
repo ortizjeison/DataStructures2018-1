@@ -6,5 +6,4 @@ public class Test {
 		String apellido = nombre.substring(2,5);
 		System.out.println(apellido);
 	}
-
 }
