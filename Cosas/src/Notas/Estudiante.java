@@ -1,4 +1,6 @@
 package Notas;
+import java.util.Arrays;
+
 import cosasUtiles.Operaciones;
 
 public class Estudiante {
@@ -7,11 +9,11 @@ public class Estudiante {
 	private double [][] notas;
 	
 	//Constructor
-	public Estudiante(String nombre, String[] materias, double[][] notas) {
+	public Estudiante(String nombre, String[] materias) {
 		super();
 		this.nombre = nombre;
 		this.materias = materias;
-		this.notas = notas;
+		this.notas = new double[materias.length][];
 	}	
 	
 	//Getters & Setters
@@ -54,6 +56,7 @@ public class Estudiante {
 			for(i=0;i<notas[indice].length;i++){
 				sum += notas[indice][i];
 			}
+			//System.out.println("suma = "+ sum);
 			return sum/i;			
 		}else 
 			System.out.println("No se puede hallar el promedio");
@@ -76,18 +79,52 @@ public class Estudiante {
 			return -1;
 	}
 	
+	public void addNota(String m, double nota) throws Exception {
+		int i = Operaciones.findByString(m, materias);
+		if(i!=-1 && nota>=0) {
+			if(notas[i]==null) {
+				notas[i]=new double [1];
+			}else { 
+				notas[i] = Arrays.copyOf(notas[i], notas[i].length+1);
+			}
+			notas[i][notas[i].length-1] = nota;		
+		}else
+			throw new Exception("volvete serio");
+	}
+	
+	public void addNota(String s, double []nota) {
+		for(double n:nota) {
+			try {
+				addNota(s,n);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 	
 	public static void main (String args[]) {
-		double [][]e1Notas = {
-		{1,2,3},
-		{4,5,6,7},
-		{3,2,1,0}
-		};
+//		double [][]e1Notas = {
+//		{1,2,3},
+//		{4,5,6,7},
+//		{3,2,1,0}
+//		};
 			
 		String [] e1Materias = {"a","b","c"};
-		Estudiante e1 = new Estudiante("E1", e1Materias, e1Notas);
+		Estudiante e1 = new Estudiante("E1", e1Materias);
 		
-		System.out.println("Promedio = "+e1.promMateria("b"));
-		System.out.println("La nota máxima = "+ e1.maxNota("b"));
+//		System.out.println("Promedio = "+e1.promMateria("b"));
+//		System.out.println("La nota máxima = "+ e1.maxNota("b"));
+		try {
+			e1.addNota("a", 3.5);
+			e1.addNota("a", 4);
+			e1.addNota("a", 3.9);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		//System.out.println(e1.promMateria("a"));
+		
+		double [] noticas = {-2,2,2,2};
+		e1.addNota("b", noticas);		
+		System.out.println(e1.promMateria("b"));
 	}
 }
