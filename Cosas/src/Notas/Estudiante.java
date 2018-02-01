@@ -65,14 +65,14 @@ public class Estudiante {
 		
 		int indice = Operaciones.findByString(m, materias);
 		if(indice!=-1) {
-			double max = -1;			
-			for(int i=0;i<notas[indice].length;i++){
+			double max = notas[indice][0];			
+			for(int i=1;i<notas[indice].length;i++){
 				if(notas[indice][i]>max) {
 					max = notas[indice][i];
 				}
 			}return max;			
 		}else 
-			System.out.println("No se puede hayar la nota máxima");
+			System.out.println("No se puede hallar la nota máxima");
 			return -1;
 	}
 	
@@ -89,5 +89,5 @@ public class Estudiante {
 		
 		System.out.println("Promedio = "+e1.promMateria("b"));
 		System.out.println("La nota máxima = "+ e1.maxNota("b"));
-	}	
+	}
 }
