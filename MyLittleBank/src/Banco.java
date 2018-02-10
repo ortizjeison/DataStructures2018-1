@@ -1,11 +1,12 @@
+import java.util.Arrays;
 
 public class Banco {
 	public String nombre;
-	private Gerente[] gerentes;
-	private Usuario[] clientes;
-	private ATM[] atms;
-	private Cajero[] cajeros;
-	private Cuenta[] cuentas;
+	protected Gerente[] gerentes;
+	protected Usuario[] clientes;
+	protected ATM[] atms;
+	protected Cajero[] cajeros;
+	
 	
 
 	public Banco(String nombre) {
@@ -55,34 +56,44 @@ public class Banco {
 		this.cajeros = cajeros;
 	}
 
-	public Cuenta[] getCuentas() {
-		return cuentas;
-	}
-
-	public void setCuentas(Cuenta[] cuentas) {
-		this.cuentas = cuentas;
-	}
-
+	
+	//ID únicos
+	
 	
 	//CRUD GERENTE
 	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) {
-		//nuevo objeto gerente:
 		Gerente g = new Gerente(id, nombre, tel, oficina, email);
 		
 		if(gerentes==null) {
-			System.out.println("gerentes[0]==null");
+			//System.out.println("gerentes[0]!=null");
 			gerentes = new Gerente[1];
 		}else {
-			
+			gerentes = Arrays.copyOf(gerentes, gerentes.length +1);
+		}
+		gerentes[gerentes.length -1] = g;
+	}
+	
+	public void eliminarGerente(int id) throws EmptyMemory, UserNotFound {
+		if(gerentes!=null) {
+			int i = 0;
+			boolean found = false;
+			while(i<gerentes.length && found == false) {
+				if(gerentes[i].getId() == id) {
+					found = true;
+				}
+				i++;
+			}
+			if(found == false) {
+				throw new UserNotFound();
+			}
+		}else {
+			throw new EmptyMemory();
 		}
 	}
 	
 	
-	
-	
-	
-	
 	public static void main(String[] args) {
-		
+		Banco b = new Banco("my little bank");
+		b.CrearGerente(2345, "Main Manager", 12312312, "340b", "main@manager.com");
 	}
 }
