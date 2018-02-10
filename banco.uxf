@@ -65,7 +65,7 @@ transaccion(cantidad: Double, cuentaDestinoID: int)
 #clientes: Cliente []
 #ATMS: ATM []
 #cuentas:Cuenta[] 
-
+prueba
 --
 -CrearGerente(id: String, nombre: String, tel: int, oficina String, email:String)
 -BuscarGerente(id:int)
