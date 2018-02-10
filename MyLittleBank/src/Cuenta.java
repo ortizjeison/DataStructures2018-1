@@ -1,20 +1,22 @@
+import java.util.Date;
 
 public abstract class Cuenta {
-	private String id;
-	private long saldo;
-	private String clienteID;
-	private String numCuenta;
-	private double cuotaManejo;
+	protected int num;
+	protected double saldo;
+	protected int clienteID;
+	protected double cuotaManejo;
+	protected boolean activa;
+	protected Date fechaCreacion; 
 	
 	//Objeto cliente o cliente id?? 
 	
 	
-	public boolean deposito(double cantidad) {
-		return true;
+	public void deposito(double cantidad) {
+		
 	}
 	
-	public boolean retiro(double cantidad) {
-		return true;
+	public void retiro(double cantidad) {
+		
 	}
 	
 }
