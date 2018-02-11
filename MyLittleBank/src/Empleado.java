@@ -58,23 +58,62 @@ public abstract class Empleado {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	
-	//CRUD USUARIO
-	public void CrearUsuario(Usuario[] a, int id, String nombre, int tel, int cel, String email) throws EmptyMemory, DuplicatedID{
-		Usuario g = new Usuario(id, nombre, tel,cel, email);
+	public static boolean idUnica(int id, Empleado[] e) throws DuplicatedID{
 		
-		if(a==null) {
-			System.out.println("usuarios[0]==null");
-			a = new Usuario[1];
-		}else {
-			a = Arrays.copyOf(a, a.length +1);
+		boolean found = true;
+		if(e!=null) {
+			int i = 0;
+			while(i<e.length && found == true) {				
+				if(e[i].getId() == id) {
+					found = false;
+				}
+				i++;
+			}
+			if(found==false) {
+				throw new DuplicatedID();
+			}
 		}
-		a[a.length -1] = g;
+		return found;
 	}
 	
+	public static boolean idUnica(int id, Usuario[] e) throws EmptyMemory, DuplicatedID{
+		
+		boolean found = true;
+		if(e!=null) {
+			int i = 0;
 
+			while(i<e.length && found == true) {
+				if(e[i].getId() == id) {
+					found = false;
+				}
+				i++;
+			}
+			if(found==false) {
+				throw new DuplicatedID();
+			}
+		}else {
+			throw new EmptyMemory();
+		}
+		return found;
+	}
+	
+	//CRUD USUARIO
+
+	public void crearUsuario(Banco b, int id, String nombre, int tel, int cel, String email) throws EmptyMemory, DuplicatedID {
+		Usuario c1 = new Usuario(id, nombre, tel, cel, email);
+		
+		if(b.clientes==null) {
+			b.clientes = new Usuario[1];
+			b.clientes[b.clientes.length -1] = c1;
+		}else if(Empleado.idUnica(id,b.clientes)==true) {			
+			b.clientes = Arrays.copyOf(b.clientes, b.clientes.length +1);
+			b.clientes[b.clientes.length -1] = c1;
+		}else {
+			throw new DuplicatedID();
+			}
+	}
+		
 	public void crearCuenta(boolean tipo, int clienteID, double saldo) {
 		//Recibir idCliente > buscarlo >crearle la cuenta
 	}

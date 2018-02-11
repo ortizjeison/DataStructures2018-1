@@ -2,16 +2,21 @@ import java.util.Arrays;
 
 public class Banco {
 	public String nombre;
-	protected Gerente[] gerentes;
-	protected Usuario[] clientes;
-	protected ATM[] atms;
-	protected Cajero[] cajeros;
+	public Gerente[] gerentes;
+	public Usuario[] clientes;
+	public ATM[] atms;
+	public Cajero[] cajeros;
 	
 	
 
 	public Banco(String nombre) {
 		super();
 		this.nombre = nombre;
+//		gerentes = new Gerente[1];
+//		clientes = new Usuario[1];
+//		atms = new ATM[1];
+//		cajeros = new Cajero[1];
+		
 	}
 	
 	//Get - set
@@ -61,16 +66,20 @@ public class Banco {
 	
 	
 	//CRUD GERENTE
-	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) {
+	
+	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) throws DuplicatedID {
+		
 		Gerente g = new Gerente(id, nombre, tel, oficina, email);
 		
 		if(gerentes==null) {
-			//System.out.println("gerentes[0]!=null");
 			gerentes = new Gerente[1];
-		}else {
+			gerentes[gerentes.length -1] = g;
+		}else if(Empleado.idUnica(id,gerentes)==true) {			
 			gerentes = Arrays.copyOf(gerentes, gerentes.length +1);
-		}
-		gerentes[gerentes.length -1] = g;
+			gerentes[gerentes.length -1] = g;
+		}else {
+			throw new DuplicatedID();
+			}
 	}
 	
 	public void eliminarGerente(int id) throws EmptyMemory, UserNotFound {
@@ -92,8 +101,23 @@ public class Banco {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DuplicatedID, EmptyMemory, UserNotFound {
 		Banco b = new Banco("my little bank");
 		b.CrearGerente(2345, "Main Manager", 12312312, "340b", "main@manager.com");
+		b.CrearGerente(23456, "Main Manager", 12312312, "340b", "main@manager.com");
+//		System.out.println(b.gerentes[0].getId());
+//		System.out.println(b.gerentes[1].getId());
+		
+		Gerente g = new Gerente(0, "", 0, "", "");
+		
+		b.gerentes[0].crearCajero(b, 123, "", 234, "", "");
+		b.gerentes[0].crearCajero(b, 1234, "", 234, "", "");
+		System.out.println("hola" + b.cajeros[0].getId());
+		b.gerentes[0].eliminarCajero(b, 123);
+		System.out.println(b.cajeros[0].getId());
+		b.cajeros[0].crearUsuario(b, 1, "", 12, 12, "");
+		b.cajeros[0].crearUsuario(b, 2, "", 12, 12, "");
+
+
 	}
 }

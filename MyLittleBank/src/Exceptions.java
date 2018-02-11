@@ -4,8 +4,13 @@ public class Exceptions {
 }
 
 class UserNotFound extends Exception{
+	static String mensaje = "No se encontró el usuario";
 	public UserNotFound() {
-		super("No se encontró el usuario");
+		super(mensaje);
+	}
+	@Override
+	public void printStackTrace() {
+		System.out.println(mensaje);
 	}
 }
 

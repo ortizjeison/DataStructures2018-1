@@ -7,74 +7,34 @@ public class Gerente extends Empleado {
 		super(id, nombre, telefono, oficina, email);
 	}
 	
-	
-	
-	public boolean idUnica(int id, Empleado[] e) throws EmptyMemory, DuplicatedID{
 		
-		boolean found = true;
-		if(e!=null) {
-			int i = 0;
-
-			while(i<e.length && found == true) {
-				if(e[i].getId() == id) {
-					found = false;
-				}
-				i++;
-			}
-			if(found==false) {
-				throw new DuplicatedID();
-			}
-		}else {
-			throw new EmptyMemory();
-		}
-		return found;
-	}
-	
-	public boolean idUnica(int id, Usuario[] e) throws EmptyMemory, DuplicatedID{
-		
-		boolean found = true;
-		if(e!=null) {
-			int i = 0;
-
-			while(i<e.length && found == true) {
-				if(e[i].getId() == id) {
-					found = false;
-				}
-				i++;
-			}
-			if(found==false) {
-				throw new DuplicatedID();
-			}
-		}else {
-			throw new EmptyMemory();
-		}
-		return found;
-	}
-	
 	//CRUD CAJERO
 	
-	public void CrearCajero(Cajero[] c, int id, String nombre, int tel, String oficina, String email) throws DuplicatedID, EmptyMemory, UserNotFound {
-		Cajero c1 = new Cajero(id, nombre, telefono, oficina, email);
+	
+	public void crearCajero(Banco b, int id, String nombre, int tel, String oficina, String email) throws DuplicatedID, EmptyMemory {
 		
-		if(idUnica(id,c)==true) {
-			if(c==null) {
-				System.out.println("gerentes[0]!=null");
-				c = new Cajero[1];
-			}else {
-				c = Arrays.copyOf(c, c.length +1);
+		Cajero c1 = new Cajero(id, nombre, tel, oficina, email);
+		
+		if(b.cajeros==null) {
+			b.cajeros = new Cajero[1];
+			b.cajeros[b.cajeros.length -1] = c1;
+		}else if(Empleado.idUnica(id,b.cajeros)==true) {			
+			b.cajeros = Arrays.copyOf(b.cajeros, b.cajeros.length +1);
+			b.cajeros[b.cajeros.length -1] = c1;
+		}else {
+			throw new DuplicatedID();
 			}
-				c[c.length -1] = c1;
-		}
 	}
 	
 	
-	public void eliminarCajero(int id, Empleado a[]) throws EmptyMemory, UserNotFound {
-		if(a!=null) {
+	public void eliminarCajero(Banco b, int id) throws EmptyMemory, UserNotFound {
+		if(b.cajeros!=null) {
 			int i = 0;
 			boolean found = false;
-			while(i<a.length && found == false) {
-				if(a[i].getId() == id) {
+			while(i<b.cajeros.length && found == false) {
+				if(b.cajeros[i].getId() == id) {
 					found = true;
+					b.cajeros[i]= null;
 				}
 				i++;
 			}
@@ -89,26 +49,13 @@ public class Gerente extends Empleado {
 	
 	//CRUD USUARIOS
 	
-	public void CrearUsuario(Usuario[] c, int id, String nombre, int tel, int cel, String email) throws EmptyMemory, DuplicatedID {
-		Usuario c1 = new Usuario(id, nombre, tel, cel, email);
-		
-		if(idUnica(id,c)==true) {
-			if(c==null) {
-				System.out.println("gerentes[0]!=null");
-				c = new Usuario[1];
-			}else {
-				c = Arrays.copyOf(c, c.length +1);
-			}
-				c[c.length -1] = c1;
-		}
-	}
-	
-	public void eliminarUsuario(int id, Usuario a[]) throws EmptyMemory, UserNotFound {
-		if(a!=null) {
+	public void eliminarUsuario(int id, Banco b) throws EmptyMemory, UserNotFound {
+		if(b.clientes!=null) {
 			int i = 0;
 			boolean found = false;
-			while(i<a.length && found == false) {
-				if(a[i].getId() == id) {
+			while(i<b.clientes.length && found == false) {
+				if(b.clientes[i].getId() == id) {
+					b.clientes[i] = null;
 					found = true;
 				}
 				i++;
