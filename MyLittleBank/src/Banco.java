@@ -1,16 +1,22 @@
+import java.util.Arrays;
 
 public class Banco {
 	public String nombre;
-	private Gerente[] gerentes;
-	private Usuario[] clientes;
-	private ATM[] atms;
-	private Cajero[] cajeros;
-	private Cuenta[] cuentas;
+	public Gerente[] gerentes;
+	public Usuario[] clientes;
+	public ATM[] atms;
+	public Cajero[] cajeros;
+	
 	
 
 	public Banco(String nombre) {
 		super();
 		this.nombre = nombre;
+//		gerentes = new Gerente[1];
+//		clientes = new Usuario[1];
+//		atms = new ATM[1];
+//		cajeros = new Cajero[1];
+		
 	}
 	
 	//Get - set
@@ -55,34 +61,63 @@ public class Banco {
 		this.cajeros = cajeros;
 	}
 
-	public Cuenta[] getCuentas() {
-		return cuentas;
-	}
-
-	public void setCuentas(Cuenta[] cuentas) {
-		this.cuentas = cuentas;
-	}
-
+	
+	//ID únicos
+	
 	
 	//CRUD GERENTE
-	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) {
-		//nuevo objeto gerente:
+	
+	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) throws DuplicatedID {
+		
 		Gerente g = new Gerente(id, nombre, tel, oficina, email);
 		
 		if(gerentes==null) {
-			System.out.println("gerentes[0]==null");
 			gerentes = new Gerente[1];
+			gerentes[gerentes.length -1] = g;
+		}else if(Empleado.idUnica(id,gerentes)==true) {			
+			gerentes = Arrays.copyOf(gerentes, gerentes.length +1);
+			gerentes[gerentes.length -1] = g;
 		}else {
-			
+			throw new DuplicatedID();
+			}
+	}
+	
+	public void eliminarGerente(int id) throws EmptyMemory, UserNotFound {
+		if(gerentes!=null) {
+			int i = 0;
+			boolean found = false;
+			while(i<gerentes.length && found == false) {
+				if(gerentes[i].getId() == id) {
+					found = true;
+				}
+				i++;
+			}
+			if(found == false) {
+				throw new UserNotFound();
+			}
+		}else {
+			throw new EmptyMemory();
 		}
 	}
 	
 	
-	
-	
-	
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DuplicatedID, EmptyMemory, UserNotFound {
+		Banco b = new Banco("my little bank");
+		b.CrearGerente(2345, "Main Manager", 12312312, "340b", "main@manager.com");
+		b.CrearGerente(23456, "Main Manager", 12312312, "340b", "main@manager.com");
+//		System.out.println(b.gerentes[0].getId());
+//		System.out.println(b.gerentes[1].getId());
 		
+		Gerente g = new Gerente(0, "", 0, "", "");
+		
+		b.gerentes[0].crearCajero(b, 123, "", 234, "", "");
+		b.gerentes[0].crearCajero(b, 1234, "", 234, "", "");
+		System.out.println("hola" + b.cajeros[0].getId());
+		b.gerentes[0].eliminarCajero(b, 123);
+		System.out.println(b.cajeros[0].getId());
+		b.cajeros[0].crearUsuario(b, 1, "", 12, 12, "");
+		b.cajeros[0].crearUsuario(b, 2, "", 12, 12, "");
+
+
 	}
 }
