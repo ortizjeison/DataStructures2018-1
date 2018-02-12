@@ -14,6 +14,7 @@ public class Persona {
 		Persona newP = new Persona(this.getNombre(), this.getEdad());
 		return newP;
 	}
+	
 	public Memento SaveToMemento() {
 		return new Memento(clonar(this));
 	}

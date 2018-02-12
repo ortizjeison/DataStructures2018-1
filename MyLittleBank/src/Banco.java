@@ -11,12 +11,7 @@ public class Banco {
 
 	public Banco(String nombre) {
 		super();
-		this.nombre = nombre;
-//		gerentes = new Gerente[1];
-//		clientes = new Usuario[1];
-//		atms = new ATM[1];
-//		cajeros = new Cajero[1];
-		
+		this.nombre = nombre;		
 	}
 	
 	//Get - set
@@ -60,16 +55,12 @@ public class Banco {
 	public void setCajeros(Cajero[] cajeros) {
 		this.cajeros = cajeros;
 	}
-
-	
-	//ID únicos
-	
 	
 	//CRUD GERENTE
 	
-	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) throws DuplicatedID {
+	public void CrearGerente(int id, String nombre, int tel, String oficina, String email) throws DuplicatedID, EmptyMemory {
 		
-		Gerente g = new Gerente(id, nombre, tel, oficina, email);
+		Gerente g = new Gerente(this, id, nombre, tel, oficina, email);
 		
 		if(gerentes==null) {
 			gerentes = new Gerente[1];
@@ -107,16 +98,17 @@ public class Banco {
 		b.CrearGerente(23456, "Main Manager", 12312312, "340b", "main@manager.com");
 //		System.out.println(b.gerentes[0].getId());
 //		System.out.println(b.gerentes[1].getId());
+
 		
-		Gerente g = new Gerente(0, "", 0, "", "");
-		
-		b.gerentes[0].crearCajero(b, 123, "", 234, "", "");
-		b.gerentes[0].crearCajero(b, 1234, "", 234, "", "");
+		b.gerentes[0].crearCajero(123, "", 234, "", "");
+		b.gerentes[0].crearCajero(1234, "", 234, "", "");
 		System.out.println("hola" + b.cajeros[0].getId());
-		b.gerentes[0].eliminarCajero(b, 123);
-		System.out.println(b.cajeros[0].getId());
-		b.cajeros[0].crearUsuario(b, 1, "", 12, 12, "");
-		b.cajeros[0].crearUsuario(b, 2, "", 12, 12, "");
+		b.gerentes[0].eliminarCajero(123);
+		//System.out.println(b.cajeros[1].getId());
+		b.cajeros[1].crearUsuario(b, 1, "", 12, 12, "");
+		b.cajeros[1].crearUsuario(b, 2, "", 12, 12, "");
+		
+		b.eliminarGerente(2345);
 
 
 	}

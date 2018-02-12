@@ -6,11 +6,13 @@ public abstract class Empleado {
 	protected int telefono;
 	protected String oficina;
 	protected String email;
+	protected Banco b;
 	
 	
 	//COnstructor
-	public Empleado(int id, String nombre, int telefono, String oficina, String email) {
+	public Empleado(Banco b, int id, String nombre, int telefono, String oficina, String email) {
 		super();
+		this.b = b;
 		this.id = id;
 		this.nombre = nombre;
 		this.telefono = telefono;
@@ -59,7 +61,7 @@ public abstract class Empleado {
 		this.email = email;
 	}
 	
-	public static boolean idUnica(int id, Empleado[] e) throws DuplicatedID{
+	public static boolean idUnica(int id, Empleado[] e) throws DuplicatedID, EmptyMemory{
 		
 		boolean found = true;
 		if(e!=null) {
@@ -73,6 +75,8 @@ public abstract class Empleado {
 			if(found==false) {
 				throw new DuplicatedID();
 			}
+		}else {
+			throw new EmptyMemory();
 		}
 		return found;
 	}
@@ -114,6 +118,10 @@ public abstract class Empleado {
 			}
 	}
 		
+	
+	
+	//*************
+
 	public void crearCuenta(boolean tipo, int clienteID, double saldo) {
 		//Recibir idCliente > buscarlo >crearle la cuenta
 	}

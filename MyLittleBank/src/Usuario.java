@@ -34,30 +34,6 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public int getTel() {
-		return tel;
-	}
-
-	public void setTel(int tel) {
-		this.tel = tel;
-	}
-
-	public int getCel() {
-		return cel;
-	}
-
-	public void setCel(int cel) {
-		this.cel = cel;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public Prestamo[] getPrestamos() {
 		return prestamos;
 	}

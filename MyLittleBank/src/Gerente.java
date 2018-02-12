@@ -2,18 +2,16 @@ import java.util.Arrays;
 
 public class Gerente extends Empleado {
 
-
-	public Gerente(int id, String nombre, int telefono, String oficina, String email) {
-		super(id, nombre, telefono, oficina, email);
-	}
 	
+	public Gerente(Banco b, int id, String nombre, int telefono, String oficina, String email) {
+		super(b, id, nombre, telefono, oficina, email);
+	}
 		
 	//CRUD CAJERO
 	
-	
-	public void crearCajero(Banco b, int id, String nombre, int tel, String oficina, String email) throws DuplicatedID, EmptyMemory {
+	public void crearCajero(int id, String nombre, int tel, String oficina, String email) throws DuplicatedID, EmptyMemory {
 		
-		Cajero c1 = new Cajero(id, nombre, tel, oficina, email);
+		Cajero c1 = new Cajero(b,id, nombre, tel, oficina, email);
 		
 		if(b.cajeros==null) {
 			b.cajeros = new Cajero[1];
@@ -26,8 +24,7 @@ public class Gerente extends Empleado {
 			}
 	}
 	
-	
-	public void eliminarCajero(Banco b, int id) throws EmptyMemory, UserNotFound {
+	public void eliminarCajero(int id) throws EmptyMemory, UserNotFound {
 		if(b.cajeros!=null) {
 			int i = 0;
 			boolean found = false;
@@ -49,7 +46,7 @@ public class Gerente extends Empleado {
 	
 	//CRUD USUARIOS
 	
-	public void eliminarUsuario(int id, Banco b) throws EmptyMemory, UserNotFound {
+	public void eliminarUsuario(int id) throws EmptyMemory, UserNotFound {
 		if(b.clientes!=null) {
 			int i = 0;
 			boolean found = false;
@@ -69,8 +66,14 @@ public class Gerente extends Empleado {
 		
 	}
 
-//	public static void main(String[] args) {
-//		Gerente g1 = new Gerente(1234, "Juan", 123123, "032", "hola@gerente.com");
-//	}
+	
+	
+	//*************
+
+	public void crearATM() {}
+	
+	public void eliminarATM() {}
+	
+	
 	
 }
