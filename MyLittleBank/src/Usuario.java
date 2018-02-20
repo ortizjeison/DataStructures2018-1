@@ -5,7 +5,6 @@ public class Usuario {
 	protected int tel;
 	protected int cel;
 	protected String email;
-	protected Prestamo [] prestamos;
 	protected Cuenta[] cuentas;
 	
 	//Constructor
@@ -32,14 +31,6 @@ public class Usuario {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public Prestamo[] getPrestamos() {
-		return prestamos;
-	}
-
-	public void setPrestamos(Prestamo[] prestamos) {
-		this.prestamos = prestamos;
 	}
 
 	public Cuenta[] getCuentas() {

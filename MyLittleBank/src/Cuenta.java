@@ -25,7 +25,7 @@ public abstract class Cuenta {
 	}
 	
 	public void deposito(double cantidad) throws ValorNegativo{
-		if(cantidad < 0) {
+		if(cantidad <= 0) {
 			throw new ValorNegativo();
 		}else{
 			saldo += cantidad;
@@ -40,6 +40,37 @@ public abstract class Cuenta {
 			saldo -= cantidad;
 		}
 	}
-	
 
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public int getClienteID() {
+		return clienteID;
+	}
+
+	public void setClienteID(int clienteID) {
+		this.clienteID = clienteID;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+	
 }

@@ -8,6 +8,6 @@ public class Ahorros extends Cuenta{
 	}
 
 	public void aplicarInteres() {
-		this.saldo = saldo * interes;
+		saldo = saldo * interes;
 	}
 }

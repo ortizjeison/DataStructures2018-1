@@ -4,7 +4,7 @@ public class Exceptions {
 }
 
 class UserNotFound extends Exception{
-	static String mensaje = "No se encontró el usuario";
+	static String mensaje = "No existe el objeto";
 	public UserNotFound() {
 		super(mensaje);
 	}
@@ -35,5 +35,11 @@ class ValorNegativo extends Exception{
 class MaxPermitido extends Exception{
 	public MaxPermitido() {
 		super("No se puede retirar un monto mayor al disponible");
+	}
+}
+
+class ImposibleConsignar extends Exception{
+	public ImposibleConsignar() {
+		super("revise los parámetros");
 	}
 }
