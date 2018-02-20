@@ -163,7 +163,7 @@ public class Banco {
 		
 		System.out.println(b.usuarios[0].cuentas[0].getSaldo());
 		
-		c1.consignacion(1, 0, "Ricardinho", 1000);
+		c1.consignacion(1, 0, "Juan", 1000);
 		
 		System.out.println(b.usuarios[0].cuentas[0].getSaldo());
 		
