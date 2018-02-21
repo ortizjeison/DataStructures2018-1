@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Persona {
+public abstract class Persona implements Serializable{
 
 	protected String nombre;
 	protected String tipoID;
