@@ -1,9 +1,8 @@
 import java.io.*;
-import java.io.ObjectOutputStream;
 
 public class ManejarFichero {
 	
-	public static void crearBabosadas(Object a) {
+	public static void guardar(Object a) {
 		FileOutputStream fos;
 		ObjectOutputStream oos = null;
 		
@@ -25,15 +24,29 @@ public class ManejarFichero {
 		}
 	}
 
+	
+	public static void leer(String path) throws IOException, ClassNotFoundException {
+		FileInputStream fis;
+		ObjectInputStream ois=null;
+		
+		
+		try {
+			fis = new FileInputStream(path);
+			ois=new ObjectInputStream(fis);
+			Aerolinea b=(Aerolinea) ois.readObject();
+			System.out.println(b.getNombre());
+		}finally {}
+	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		Aerolinea a = new Aerolinea("IsisAirlines");
 		a.AddAvion("AA", 10, 0);
 		a.AddAvion("XX", 5555, 0);
 		a.AddAvion("BB", 111, 0);
 		a.AddAeropuerto("A", "B", "C");
 		System.out.println("hola");
-		crearBabosadas(a);
+		guardar(a);
+		leer("t.ins");
 	}
 
 }

@@ -14,6 +14,41 @@ public class Aerolinea implements Serializable{
 	protected Maleta[] maletas;
 	
 	
+	public Aerolinea(String nombre) {
+		super();
+		this.nombre = nombre;
+		this.pasajeros = new Pasajero[1];
+		this.aviones = new Avion[1];
+		this.vuelos = new Vuelo[1];
+		this.empleados = new Empleado[1];
+		this.tiquetes = new Tiquete[1];
+		this.aeropuertos = new Aeropuerto[1];
+		this.maletas = new Maleta[1];
+	}
+	
+
+	public Vuelo[] getVuelos() {
+		return vuelos;
+	}
+
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public void setVuelos(Vuelo[] vuelos) {
+		this.vuelos = vuelos;
+	}
+
+
+
 	public void AddAvion(String matricula, int time, int estado) {
 		Avion a = new Avion(matricula,time,estado);
 		if(aviones==null) {
@@ -37,19 +72,6 @@ public class Aerolinea implements Serializable{
 			aeropuertos[aeropuertos.length -1] = a;
 		}
 	}
-		
-		
-	public Aerolinea(String nombre) {
-		super();
-		this.nombre = nombre;
-		this.pasajeros = new Pasajero[1];
-		this.aviones = new Avion[1];
-		this.vuelos = new Vuelo[1];
-		this.empleados = new Empleado[1];
-		this.tiquetes = new Tiquete[1];
-		this.aeropuertos = new Aeropuerto[1];
-		this.maletas = new Maleta[1];
-	}
 	
 	public void crearVuelo(Date fsalida, Date frealSalida, Date fllegada, Aeropuerto partida, Aeropuerto llegada) {
 		Avion a = buscarAvion();
@@ -62,6 +84,8 @@ public class Aerolinea implements Serializable{
 			
 		}
 	}
+	
+	
 	
 	
 	public Avion buscarAvion() {
