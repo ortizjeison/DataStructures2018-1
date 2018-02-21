@@ -6,7 +6,6 @@ public class Aeropuerto {
 	
 	
 	public Aeropuerto(String nombre, String ciudad, String pais, String[] puertas, boolean estado) {
-		super();
 		this.nombre = nombre;
 		this.ciudad = ciudad;
 		this.pais = pais;
