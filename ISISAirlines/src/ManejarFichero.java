@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 
 public class ManejarFichero {
 	
@@ -38,20 +39,14 @@ public class ManejarFichero {
 		}finally {}
 	}
 	
-//	public String nombre,ciudad,pais;
-//	public String puertas[];
-//	public boolean estado;
-//	for(int j=0;j==5;j++) {
-//		pw.println(a.aeropuertos[i].getNombre());
-//	}
+
 	
 	public static void guardarAeropuertos(Aerolinea a) throws IOException {
 		FileWriter fichero = null;
 		PrintWriter pw = null;
 		try {
-			fichero = new FileWriter("aeropuertos.ins");
+			fichero = new FileWriter("aeropuertos.txt");
 			pw = new PrintWriter(fichero);
-			
 			
 			for(int i=1;i<a.aeropuertos.length;i++) {
 				pw.println("Nombre:" + a.aeropuertos[i].getNombre());
@@ -59,8 +54,8 @@ public class ManejarFichero {
 				pw.println("País:" + a.aeropuertos[i].getPais());
 				pw.println("Puertas:" + a.aeropuertos[i].getPuertasString());
 				pw.println("Estado:" + a.aeropuertos[i].estado);
-				
-			}
+			}			
+			
 			
 		}catch (Exception e) {
             e.printStackTrace();
@@ -74,6 +69,83 @@ public class ManejarFichero {
         }
 	}
 	
+	public static void LeerAeropuertos(Aerolinea a) throws IOException {
+		
+		File file = null;
+		FileReader fr = null;
+		FileReader fr2 = null;
+		BufferedReader br = null;
+		BufferedReader br2 = null;
+		
+		try {
+			file = new File("aeropuertos.txt");
+			fr = new FileReader (file);
+			br = new BufferedReader(fr);
+			
+			fr2= new FileReader(file);
+			br2 = new BufferedReader(fr2);
+			
+			
+			String line = null;			
+			String nombre,ciudad,pais;
+			boolean estado;
+			String line2 = null;
+			
+			int contadorObjetos = 0;
+			
+			while((line2=br2.readLine())!=null) {
+				contadorObjetos ++;
+			}
+			contadorObjetos --;
+			contadorObjetos /= 5;			
+			
+			for(int i=1;i<=contadorObjetos;i++) {
+				
+				//Nombre
+				line = br.readLine();
+				nombre = line.substring(7);
+				
+				//Ciudad
+				line = br.readLine();
+				ciudad = line.substring(7);
+				
+				//País
+				line = br.readLine();
+				pais = line.substring(5);
+				
+				//Puertas
+				line = br.readLine();
+				String puertas [] = line.split("/");
+				
+				//Estado
+				line = br.readLine();				
+				String estadoS = line.substring(7);
+				if(estadoS == "true") {
+					estado = true;
+				}else {
+					estado = false;
+				}		
+				
+				a.AddAeropuerto(nombre,ciudad,pais);
+				a.aeropuertos[a.aeropuertos.length-1].setEstado(estado);
+				a.aeropuertos[a.aeropuertos.length-1].setPuertas(puertas);
+				
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+			}finally{
+				try{                    
+		            if( null != fr ){   
+		               fr.close();     
+		            }                  
+		         }catch (Exception e2){ 
+		            e2.printStackTrace();
+		         }				
+			}
+	}
+	
+	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		Aerolinea a = new Aerolinea("IsisAirlines");
 		a.AddAvion("AA", 10, 0);
@@ -85,11 +157,13 @@ public class ManejarFichero {
 //		leer("t.ins");
 		String [] p1 = {"1111","222","333"};
 		
-		a.AddAeropuerto("A", "B", "C"); a.aeropuertos[1].setPuertas(p1);
+		a.AddAeropuerto("Z", "Z", "Z"); a.aeropuertos[1].setPuertas(p1);
 		a.AddAeropuerto("A", "A", "A"); a.aeropuertos[2].setPuertas(p1);
 		a.AddAeropuerto("B", "B", "B"); a.aeropuertos[3].setPuertas(p1);
 		a.AddAeropuerto("C", "C", "C"); a.aeropuertos[4].setPuertas(p1);
 		
+		guardarAeropuertos(a);
+		LeerAeropuertos(a);
 		guardarAeropuertos(a);
 	}
 
