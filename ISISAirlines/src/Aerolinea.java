@@ -26,6 +26,7 @@ public class Aerolinea implements Serializable{
 		this.maletas = new Maleta[1];
 	}
 	
+	public Aerolinea() {}
 
 	public Vuelo[] getVuelos() {
 		return vuelos;
@@ -96,8 +97,6 @@ public class Aerolinea implements Serializable{
 	}
 	
 	
-	
-	
 	public Avion buscarAvion() {
 		int i =0;
 		while(i<aviones.length) {
@@ -120,4 +119,76 @@ public class Aerolinea implements Serializable{
 		return null;
 	}
 	
+	public void guardar(String path) {
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos = null;
+		
+		try {
+			fos = new FileOutputStream(path);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(this);
+		}catch (FileNotFoundException e){
+			System.out.println("404 fichero not found");
+
+		}catch (IOException e) {
+			System.out.println("No es serializable");
+		}finally {
+			try {
+				oos.close();
+			}catch(IOException e) {
+				System.out.println("no se puede cerrar");
+			}
+		}
+	}
+	
+	
+	public void leer(String path) throws IOException, ClassNotFoundException {
+		FileInputStream fis;
+		ObjectInputStream ois=null;
+		
+		fis = new FileInputStream(path);
+		ois=new ObjectInputStream(fis);
+		Aerolinea b=(Aerolinea) ois.readObject();
+		this.nombre = b.nombre;
+		System.out.println("!!!" +nombre);
+		this.pasajeros = b.pasajeros;
+		this.aviones = b.aviones;
+		this.vuelos = b.vuelos;
+		this.empleados = b.empleados;
+		this.tiquetes = b.tiquetes;
+		this.aeropuertos = b.aeropuertos;
+		this.maletas = b.maletas;
+		ois.close();
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Aerolinea [nombre=" + nombre + ", pasajeros=" + Arrays.toString(pasajeros) + ", aviones="
+				+ Arrays.toString(aviones) + ", vuelos=" + Arrays.toString(vuelos) + ", empleados="
+				+ Arrays.toString(empleados) + ", tiquetes=" + Arrays.toString(tiquetes) + ", aeropuertos="
+				+ Arrays.toString(aeropuertos) + ", maletas=" + Arrays.toString(maletas) + "]";
+	}
+
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
+		
+		Aerolinea a = new Aerolinea("IsisAirlines");
+		a.AddAvion("AA", 10, 0);
+		a.AddAvion("XX", 5555, 0);
+		a.AddAvion("BB", 111, 0);
+		
+		String [] p1 = {"1111","222","333"};
+		
+		a.AddAeropuerto("Z", "Z", "Z"); a.aeropuertos[1].setPuertas(p1);
+		a.AddAeropuerto("A", "A", "A"); a.aeropuertos[2].setPuertas(p1);
+		a.AddAeropuerto("B", "B", "B"); a.aeropuertos[3].setPuertas(p1);
+		a.AddAeropuerto("C", "C", "C"); a.aeropuertos[4].setPuertas(p1);
+		
+		a.guardar("aerolinea.ins");
+		
+		Aerolinea b = new Aerolinea();
+		b.leer("aerolinea.ins");
+		System.out.println(b);
+	}
 }
