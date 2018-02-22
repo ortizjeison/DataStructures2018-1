@@ -49,6 +49,14 @@ public class Aeropuerto implements Serializable{
 		return puertas;
 	}
 
+	public String getPuertasString() {
+		String a="";
+		for(int i=0;i<puertas.length;i++) {
+			a += puertas[i];
+			a += "/";
+		}
+		return a;
+	}
 
 	public void setPuertas(String[] puertas) {
 		this.puertas = puertas;

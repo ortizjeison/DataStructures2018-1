@@ -49,6 +49,16 @@ public class Aerolinea implements Serializable{
 
 
 
+	public Aeropuerto[] getAeropuertos() {
+		return aeropuertos;
+	}
+
+
+	public void setAeropuertos(Aeropuerto[] aeropuertos) {
+		this.aeropuertos = aeropuertos;
+	}
+
+
 	public void AddAvion(String matricula, int time, int estado) {
 		Avion a = new Avion(matricula,time,estado);
 		if(aviones==null) {
