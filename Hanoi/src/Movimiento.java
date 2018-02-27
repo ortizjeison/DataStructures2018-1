@@ -9,6 +9,7 @@ public class Movimiento {
 		d = disco;
 		from = f;
 		to = t;
+		d.setPosicion(t);
 	}
 	
 	public String toString() {

@@ -1,5 +1,6 @@
 
 public class Disco {
+	
 	public String color;
 	public int id;
 	public char posicion;

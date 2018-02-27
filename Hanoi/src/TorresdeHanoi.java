@@ -39,9 +39,7 @@ public class TorresdeHanoi {
 		} else {
 			solveR(current-1, a, c, b);
 			movimientos.add(m);
-			discos.get(current-1).setPosicion(c);
 			solveR(current-1, b, a, c);
-			discos.get(current-1).setPosicion(c);
 		}
 	}
 
@@ -57,6 +55,7 @@ public class TorresdeHanoi {
 		}
 	}
 	
+	
 	public static void main(String[] args) {	
 
 		//long time_start = System.currentTimeMillis();
@@ -70,16 +69,32 @@ public class TorresdeHanoi {
 		Disco d1 = new Disco("crema");
 		Disco d2 = new Disco("rosa");
 		Disco d3 = new Disco("morado");
+		Disco d4 = new Disco("negro");
 				
 		prueba.addDisco(d1);
 		prueba.addDisco(d2);
 		prueba.addDisco(d3);
+		prueba.addDisco(d4);
+		
+		
+		
+//		System.out.println(prueba.discos.get(0).getPosicion());
+//		System.out.println(prueba.discos.get(1).getPosicion());
+//		System.out.println(prueba.discos.get(2).getPosicion());
+//		System.out.println(prueba.discos.get(3).getPosicion());
 		
 		
 		prueba.solve();
 		
 		System.out.println("Pasos totales = " + contador);
+		
+		
 		prueba.printMovimientos();
+		
+//		System.out.println(prueba.discos.get(0).getPosicion());
+//		System.out.println(prueba.discos.get(1).getPosicion());
+//		System.out.println(prueba.discos.get(2).getPosicion());
+//		System.out.println(prueba.discos.get(3).getPosicion());
 		
 	}
 }
