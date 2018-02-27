@@ -5,7 +5,6 @@ import java.util.Queue;
 
 public class TorresdeHanoi {
 	
-	//public int discos;
 	public char a,b,c;
 	public Queue<Movimiento> movimientos = new LinkedList<>();
 	static long contador = 0;
@@ -16,16 +15,13 @@ public class TorresdeHanoi {
 	public TorresdeHanoi(char a, char b, char c) {
 		this.a = a;
 		this.b = b;
-		this.c = c;
-		
+		this.c = c;	
 	}
 
 	public void addDisco(Disco d) {
 		discos.add(d);
 		current = discos.lastIndexOf(d);
-		System.out.println("current = " + current);
 	}
-	//Solve
 	
 	
 	public void solve() {
@@ -35,7 +31,7 @@ public class TorresdeHanoi {
 	public void solveR(int current, char a, char b, char c) {
 		contador += 1;
 		
-		Movimiento m = new Movimiento(discos.get(current).getColor(), a, c);
+		Movimiento m = new Movimiento(discos.get(current), a, c);
 		
 		if (current == 0) {
 			discos.get(0).setPosicion(c);
