@@ -20,8 +20,7 @@ public class TorresdeHanoi {
 	
 	//Solve
 	public void solve(int discos, char a, char b, char c) {
-		contador += 1;
-		
+		contador += 1;		
 		Movimiento m = new Movimiento(discos, a, c);
 		if (discos == 1) {			
 			movimientos.add(m);			
