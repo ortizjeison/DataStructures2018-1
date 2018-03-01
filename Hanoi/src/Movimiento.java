@@ -1,17 +1,18 @@
 
 public class Movimiento {
 	
-	public int disco;
+	public Disco d;
 	public char from;
 	public char to;
 	
-	public Movimiento(int d, char f, char t) {
-		disco = d;
+	public Movimiento(Disco disco, char f, char t) {
+		d = disco;
 		from = f;
 		to = t;
+		d.setPosicion(t);
 	}
 	
 	public String toString() {
-		return "Mover disco " + disco + " desde " + from + " hasta " + to ;
+		return "Mover disco " + d.getColor() + " desde " + from + " hasta " + to ;
 	}
 }
