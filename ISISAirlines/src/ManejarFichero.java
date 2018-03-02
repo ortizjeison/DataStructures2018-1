@@ -113,7 +113,7 @@ public class ManejarFichero {
 				line = br.readLine();
 				pais = line.substring(5);
 				
-				//Puertas
+				//Puertas 
 				line = br.readLine();
 				String puertas [] = line.split("/");
 				
