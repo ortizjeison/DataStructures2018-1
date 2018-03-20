@@ -15,8 +15,6 @@ public abstract class Usuario {
 	protected SistemaInventario sys;
 
 	
-	
-
 	public Usuario(String user, String password, String nombre, String id, String signature, SistemaInventario sys) {
 		super();
 		this.user = user;
