@@ -14,6 +14,6 @@ public class HWorld {
         // Make your robot say something
         tts.say("Hello World!");
 		TorresdeHanoi prueba = new TorresdeHanoi(3, 'a','b','c');		
-		tts.say(prueba.Hanoi(3));
+		//tts.say(prueba.Hanoi(3));
     }
 }
