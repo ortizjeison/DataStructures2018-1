@@ -67,7 +67,7 @@ public class ManejarFichero {
         }
 	}
 	
-	//FICHERO TEXTO
+	//LEER FICHERO TEXTO
 	public static void LeerAeropuertos(Aerolinea a) throws IOException {
 		
 		File file = null;
@@ -143,6 +143,32 @@ public class ManejarFichero {
 		         }				
 			}
 	}
+	
+	
+	
+	public void leerValoresReferencia(String nombreFichero) throws IOException, ECantidadCampos, EFicheroVacio {
+		FileReader file= new FileReader(new File(nombreFichero));
+		BufferedReader buffer= new BufferedReader(file);
+		String line;
+		boolean error1=true;// Error de fichero vacío
+		while ((line=buffer.readLine())!=null && line.compareTo("")!=0) {
+			String[] infexamen=line.split(",");
+			if (infexamen.length<3) {
+				buffer.close();
+				throw new ECantidadCampos();
+			}			
+			ValorExamen examen=new ValorExamen(infexamen[0], Double.parseDouble(infexamen[1]), Double.parseDouble(infexamen[2]));
+			error1=false;
+			if (valoresReferencia==null)
+				valoresReferencia= new ValorExamen[1];
+			else
+				valoresReferencia=Arrays.copyOf(valoresReferencia, valoresReferencia.length+1);
+			valoresReferencia[valoresReferencia.length-1]=examen;
+		}
+		buffer.close();
+		if (error1) throw new EFicheroVacio();
+	}
+	
 	
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
