@@ -27,7 +27,7 @@ public class Ordenamiento {
 					a[j+1] = temp;
 				}
 			}
-		System.out.println("Pasos = " + k);
+		System.out.println("Comparaciones = " + k);
 	}
 	
 	public static void bubblesortOp(Comparable[] a) {
@@ -48,7 +48,7 @@ public class Ordenamiento {
 			}
 			i++;
 		}
-		System.out.println("Pasos = " + k);
+		System.out.println("Comparaciones = " + k);
 	}
 	
 	public static void SelectSort(Comparable [] a) {
@@ -88,9 +88,9 @@ public class Ordenamiento {
 		Integer [] a = {8,2,6,7,8,9};
 		Integer [] b = Arrays.copyOf(a, a.length);
 		
-		System.out.println("bubble normal");
+		System.out.println("*bubble normal*");
 		bubblesort2(a);
-		System.out.println("Bubble óptimo");
+		System.out.println("*Bubble óptimo*");
 		bubblesortOp(b);
 //		//Personas
 //		Persona p1 = new Persona("Marcela",24);
