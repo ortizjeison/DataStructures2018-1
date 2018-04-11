@@ -39,8 +39,8 @@ public class Persona implements Comparable<Persona> {
 
 	public int compareTo(Persona p) {
 		//return nombre.compareTo(p.getNombre());
-		return (nombre.compareTo(p.getNombre())==0)?
-				edad-p.getEdad():nombre.compareTo(p.getNombre());
+		return nombre.compareTo(p.getNombre());
+				//(nombre.compareTo(p.getNombre())==0)?edad-p.getEdad():nombre.compareTo(p.getNombre());
 	}
 
 	
