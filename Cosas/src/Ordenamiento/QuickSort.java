@@ -1,6 +1,7 @@
 package Ordenamiento;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class QuickSort {
 	
@@ -80,6 +81,52 @@ public class QuickSort {
             }
 	}
 	
+	
+	
+	//QUICKSORT ALEATORIO
+	public static void quickSortR(Comparable[] a) {
+		quickSortRnd(a, 0, a.length - 1);
+	}
+
+	private static void quickSortRnd(Comparable[] a, int inicio, int fin) {
+		Random r = new Random();
+		if (fin <= inicio) {
+			return;
+		} else {
+			int random = r.nextInt((fin - inicio) + inicio);
+			Comparable pivote = a[random];
+			System.out.println(pivote);
+			int i = inicio - 1;
+			int j = fin + 1;
+			Comparable temp;
+			while (i < j) {
+				while (i < fin && a[++i].compareTo(pivote) <= 0);
+				while (j > inicio && pivote.compareTo(a[--j]) <= 0);
+
+				if (i < j) {
+					temp = a[i];
+					a[i] = a[j];
+					a[j] = temp;
+				}
+			}
+			int partition = i;
+
+			if (i > random) {
+				partition = j;
+			}
+			if (i >= random && j <= random) {
+				partition = random;
+			} else {
+				temp = a[partition];
+				a[partition] = a[random];
+				a[random] = temp;
+			}
+
+			quickSort(a, inicio, partition - 1);
+			quickSort(a, partition + 1, fin);
+
+		}
+	}
 	
 	public static void main(String[] args) {
 		Integer [] a1 = {2,6,8,10,20}; //5

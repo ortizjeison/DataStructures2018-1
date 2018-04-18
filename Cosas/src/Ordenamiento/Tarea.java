@@ -22,7 +22,7 @@ public class Tarea {
 					System.out.println("No está ordenado descendentemente");
 				}
 			}
-			i++;
+			i++; 
 		}
 		if(sw==true) {
 			System.out.println("Arreglo Ordenado");
