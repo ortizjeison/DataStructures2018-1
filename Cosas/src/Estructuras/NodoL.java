@@ -17,6 +17,10 @@ public class NodoL <E>{
 		return next;
 	}
 	
+	public NodoL<E> getNodo(){
+		return this;
+	}
+	
 	public  void setNext(NodoL<E> n) {
 		next = n;
 	}

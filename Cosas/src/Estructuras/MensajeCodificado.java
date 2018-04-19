@@ -26,4 +26,34 @@ public class MensajeCodificado {
 	}
 	
 	
+	public static <E> Queue<E> String2Queue(String cadena) {
+		Queue<E> e = new LinkedList<E>();
+		for (int i = 0; i < cadena.length(); i++) {
+			e.add((E) ((Character) cadena.charAt(i)));
+		}
+		return e;
+	}
+
+	public static <E> Stack<E> String2Stack(String cadena) {
+		Stack<E> e = new Stack<E>();
+		for (int i = 0; i < cadena.length(); i++) {
+			e.add((E) ((Character) cadena.charAt(i)));
+		}
+		return e;
+	}
+	
+
+	/////////////////////
+	//Etapa 1
+	
+	public static <E> Stack<E> etapa1(LinkedList<E> Cola) {
+		Stack<E> e = new Stack<E>();
+		String s = "a";
+		char[] vocales = { 'a', 'e', 'i', 'o', 'u' };
+		return e;
+	}
+	
+	
+	
+	
 }
