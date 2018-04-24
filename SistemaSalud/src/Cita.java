@@ -1,7 +1,8 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cita {
-	private static final AtomicInteger id = new AtomicInteger(0);
+	static int k = 0;
+	int id;
 	Paciente p;
 	Medico m;
 	Consultorio c;
@@ -9,6 +10,7 @@ public class Cita {
 	
 	public Cita(Paciente p, Medico m, Consultorio c) {
 		super();
+		id = k++;
 		this.p = p;
 		this.m = m;
 		this.c = c;

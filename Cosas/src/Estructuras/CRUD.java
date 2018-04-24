@@ -79,7 +79,6 @@ public class CRUD {
 		start = System.currentTimeMillis();
 		cola.poll();
 		end = System.currentTimeMillis();
-		
 		time = end -start;
 		System.out.println("Queue delete: " + time);
 		
@@ -89,6 +88,7 @@ public class CRUD {
 		for(int i=0;i<N;i++) {
 			stack.push(i);
 		}
+		
 		//ADD
 		start = System.currentTimeMillis();
 		stack.push(P2);
@@ -98,7 +98,6 @@ public class CRUD {
 		//DELETE
 		
 		start = System.currentTimeMillis();
-		stack.pop();
 		end = System.currentTimeMillis();
 		
 		time = end -start;

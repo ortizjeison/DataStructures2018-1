@@ -1,0 +1,43 @@
+#ArrayList:
+
+ArrayList<T> a = new ArrayList<T>();
+
+a.add(index,o);
+a.remove(index);
+
+
+#LinkedList
+
+LinkedList<T> L = new LinkedList<T>();
+
+L.add(index,o);
+L.remove(index);
+
+
+
+#Pila (Stack)
+Stack<T> s= new Stack<T>();
+
+#Add
+s.push();
+
+#Eliminar tope
+s.pop();
+
+#Mostrar tope
+s.peek();
+
+
+
+#Cola (Queue)
+Queue<T> cola= new LinkedList<T>();
+
+cola.add(o)
+
+#Eliminar cabeza
+cola.poll();
+
+#Mostrar cabeza
+cola.peek();
+
+
