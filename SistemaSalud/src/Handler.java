@@ -5,24 +5,28 @@ import java.util.Queue;
 public class Handler {
 	//Cola de pacientes
 	Queue<Paciente> pacientes= new LinkedList<Paciente>();
-	//Cola consultorios
+	//Lista consultorios
 	ArrayList<Consultorio> consultorios= new ArrayList<Consultorio>();
 	//Citas
 	ArrayList<Cita> citas = new ArrayList<Cita>();
 	//Medicos
 	ArrayList<Medico> medicos = new ArrayList<Medico>();
 	
-	
-	public boolean asignarCita(Paciente p, String nombreMedico) {
-		//Añadir el paciente a la cola
+	public void addPaciente(Paciente p) {
 		pacientes.add(p);
-		
+	}
+	
+	public boolean asignarCita() {
+		//Añadir el paciente a la cola
+
+		Paciente p = pacientes.peek();
 		//Crear cita y añadirla al arraylist
-		Medico M = findMedico(nombreMedico);
+		Medico M = findMedico(p.getNombre_medico());
 		Consultorio C = findConsultorio();
 		
 		if(M!=null && C!=null) {
 			Cita ctemp = new Cita(p, M, C);
+			C.setDisponible(false);
 			return citas.add(ctemp);
 		}
 		return false;

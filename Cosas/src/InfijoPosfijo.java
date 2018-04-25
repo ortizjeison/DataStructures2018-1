@@ -6,17 +6,18 @@ public class InfijoPosfijo {
 	public static ArrayList<String> convert(String expresion) {
 		
 		expresion = depurar(expresion);
-		String[] arrayInfijo = expresion.split(" ");
+		String[] array = expresion.split(" ");
 
 		Stack<String> E = new Stack<String>();
 		Stack<String> Temp = new Stack<String>();
 		Stack<String> S = new Stack<String>();
 
-		for (int i = arrayInfijo.length - 1; i >= 0; i--) {
-			E.push(arrayInfijo[i]);
+		for (int i=array.length-1; i >= 0; i--) {
+			//Agrega a la pila de entrada lo que hay en el arreglo
+			E.push(array[i]);
 		}
 		
-		// Algoritmo Infijo a Postfijo
+		
 		while (!E.isEmpty()) {
 			
 			switch (prioridad(E.peek())) {
@@ -59,7 +60,7 @@ public class InfijoPosfijo {
 
 	}
 
-	// Jerarquia de los operadores
+	// Operadores
 	private static int prioridad(String operador) {
 		int orden = 99;
 		if (operador.equals("^"))
@@ -96,8 +97,7 @@ public class InfijoPosfijo {
 
 	public static void main(String[] args) {
 
-		String exp = "2+3*4";
-		ArrayList<String> test = convert(exp);
+		ArrayList<String> test = convert("(62+2)*4/2^3-4");
 		System.out.println(test.toString());
 
 	}
