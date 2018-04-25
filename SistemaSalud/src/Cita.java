@@ -1,4 +1,3 @@
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cita {
 	static int k = 0;
