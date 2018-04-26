@@ -32,6 +32,28 @@ public class Arbol <E extends Comparable>{
 		}
 	}
 	
+	///
+	
+	public ArrayList<E> preorden2(){
+		ArrayList<E> list = new ArrayList<E>();
+		preorden2(raiz,list);
+		System.out.println();
+		System.out.println(list.toString());
+		return list;
+	}
+		
+	public void preorden2(Nodo <E> nodo, ArrayList<E> l){
+		if(!(nodo==null)){
+			//System.out.println(nodo + " aÃ±adido");
+			l.add(nodo.getllave());
+			preorden(nodo.getHijoI());
+			preorden(nodo.getHijoD());
+		}
+	}
+	
+	
+	
+	
 	
 	//Posorden IZ-DER-RAIZ
 	
@@ -62,6 +84,9 @@ public class Arbol <E extends Comparable>{
 			inorden(nodo.getHijoD());
 		}
 	}
+	
+	
+
 	
 	
 	public int cantidadHojas(){
@@ -122,9 +147,12 @@ public class Arbol <E extends Comparable>{
 //		Nodo[] pre ={n1,n5,n3,n2,n4,n6};
 
 		
-		
 		System.out.println("Preorden");
 		a.preorden();
+		
+		
+		System.out.println("Preorden2");
+		a.preorden2();
 //		System.out.println("Posorden");
 //		a.posorden();
 //		System.out.println("Inorden");
@@ -132,7 +160,7 @@ public class Arbol <E extends Comparable>{
 	}
 	
 	//Convertir arbol cualquiera a binario
-	//Codigo de Huffman y cómo se utilizaría en árboles binarios
+	//Codigo de Huffman y cï¿½mo se utilizarï¿½a en ï¿½rboles binarios
 	//Cuad-arbol
 }
 
