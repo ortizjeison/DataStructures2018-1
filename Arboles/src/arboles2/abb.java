@@ -81,6 +81,45 @@ public class abb<E extends Comparable> extends Arbol<E> {
             return antecesorR(nodo.getHijoD());
         }
     }
+    
+    
+    public void eliminarNodo(E llave) throws Exception {
+		raiz = eliminarR(llave, raiz);
+
+	}
+    
+    
+    public Nodo<E> eliminarR(E llave, Nodo<E> raiz) throws Exception {
+        if (raiz == null) {
+            throw new Exception("No se encuentra el nodo");
+        } else {
+            if (llave.compareTo(raiz.getllave()) < 0) {
+                raiz.setHijoI(eliminarR(llave, raiz.getHijoI()));
+            } else {
+                if (llave.compareTo(raiz.getllave()) > 0) {
+                    raiz.setHijoD(eliminarR(llave, raiz.getHijoD()));
+                } else {
+                    if (llave.compareTo(raiz.getllave()) == 0) {
+                        // Caso 3
+                        if (raiz.getHijoD() != null && raiz.getHijoI() != null) {
+                            Nodo<E> antecesor = antecesor(raiz);
+                            raiz.setLlave(antecesor.getllave());
+                            raiz.setHijoI(eliminarR(antecesor.getllave(), raiz.getHijoI()));
+ 
+                        } else {
+                            // caso2 o caso 1
+                            if (raiz.getHijoD() != null) {
+                                raiz = raiz.getHijoD();
+                            } else {
+                                raiz = raiz.getHijoI();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return raiz;
+    }
 
 	
 	public static void main(String[] args){
@@ -104,6 +143,7 @@ public class abb<E extends Comparable> extends Arbol<E> {
 		//System.out.println("Preorden");
 		
 		try {
+			abb.insertarNodo(n5);
 			abb.insertarNodo(n3);
 			abb.insertarNodo(n9);
 			abb.insertarNodo(n7);
@@ -111,11 +151,11 @@ public class abb<E extends Comparable> extends Arbol<E> {
 			abb.insertarNodo(n6);
 			abb.insertarNodo(n4);
 			abb.insertarNodo(n10);
-			
-			System.out.println(abb.buscar(8));
+			System.out.println("antecesor" + abb.antecesor(n5));
+			abb.eliminarNodo(5);
+			//System.out.println(abb.buscar(8));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 		

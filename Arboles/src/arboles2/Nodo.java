@@ -32,6 +32,10 @@ public class Nodo <E> {
 		HijoI = h;
 	}
 	
+	public void setLlave(E llave) {
+		this.llave = llave;
+	}
+	
 	
 	public E getllave(){
 		return llave;
