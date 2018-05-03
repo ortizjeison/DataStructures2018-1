@@ -8,47 +8,51 @@ public class abb<E extends Comparable> extends Arbol<E> {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Nodo<E> buscar(E llave){
+	public Nodo<E> buscar(E llave) throws Exception{
 		return buscar(raiz,llave);
 		
 	}
 	
-	public Nodo<E> buscar(Nodo <E> r, E llave){
+	public Nodo<E> buscar(Nodo <E> r, E llave) throws Exception{
 		if(r==null)
-			//throw new ExceptionNodo("Not found");
+			throw new Exception("Not found");
 		if(llave.compareTo(r.getllave())<0)
 			return buscar(r.getHijoI(),llave);
 		
 		if(llave.compareTo(r.getllave())>0)
 			return buscar(r.getHijoD(), llave);
 		
-		return (Nodo<E>) r.getllave();
+		return raiz;
 	}
 	
-	
-	public Nodo<E> insertar(E llave){
-		return buscar(raiz,llave);
-		
-	}
-	
-	public Nodo<E> insertar(Nodo <E> r, E llave){
-		if(r==null);
-			//throw new ExceptionNodo("Not found");
-		if(llave.compareTo(r.getllave())<0)
-			return buscar(r.getHijoI(),llave);
-		
-		if(llave.compareTo(r.getllave())>0)
-			return buscar(r.getHijoD(), llave);
-		
-		return (Nodo<E>) r.getllave();
-		
-	}
+    public Nodo<E> insertarNodo(Nodo<E> nodo) throws Exception {
+        raiz = insertarNodoR(nodo, raiz);
+        return raiz;
+ 
+    }
+    
+    public Nodo<E> insertarNodoR(Nodo<E> nodo, Nodo<E> raiz1) throws Exception {
+    	if (raiz1 == null) {
+    		raiz1 = nodo;
+    	} else {
+    		if (nodo.getllave().compareTo(raiz1.getllave()) < 0) {
+    			raiz1.setHijoI(insertarNodoR(nodo, raiz1.getHijoI()));
+    		}
+    		if (nodo.getllave().compareTo(raiz1.getllave()) > 0) {
+    			raiz1.setHijoD(insertarNodoR(nodo, raiz1.getHijoD()));
+    		}
+    		if (nodo.getllave().compareTo(raiz1.getllave()) == 0) {
+    			throw new Exception("El nodo esta repetido");
+    		}
+    	}
+    	return raiz1;
+    }
 	
 	public static int alturaNodo(Nodo<Integer> nodo) {
 		
 		int altura = 0;
 		
-		//Por definición
+		//Por definiciï¿½n
 		if(nodo==null){
 			altura = -1;
 		}
@@ -60,8 +64,24 @@ public class abb<E extends Comparable> extends Arbol<E> {
 		return altura;
 	}
 	
+    
+	
+	public Nodo<E> antecesor(Nodo<E> nodo) throws Exception {
+        if (nodo.getHijoI() == null) {
+            throw new Exception("404");
+        } else {
+            return antecesorR(nodo);
+        }
+    }
+	
+    public Nodo<E> antecesorR(Nodo<E> nodo) {
+        if (nodo.getHijoD() == null) {
+            return nodo;
+        } else {
+            return antecesorR(nodo.getHijoD());
+        }
+    }
 
-	//Crear árbol desde preorden, inorden
 	
 	public static void main(String[] args){
 		
@@ -76,23 +96,33 @@ public class abb<E extends Comparable> extends Arbol<E> {
 		Nodo<Integer> n9 = new Nodo<Integer>(9);
 		Nodo<Integer> n10 = new Nodo<Integer>(10);
 
-		n1.setHijoI(n2);
-		n1.setHijoD(n5);
-		n5.setHijoD(n6);
-		n2.setHijoI(n3);
-		n2.setHijoD(n4);
-		n3.setHijoI(n7);
-		n4.setHijoI(n8);
-		n7.setHijoD(n10);
-		n8.setHijoD(n9);
+
+		
 		
 				
-		Arbol<Integer> abb=new abb<Integer>(n1);
+		abb<Integer> abb=new abb<Integer>(n1);
 		//System.out.println("Preorden");
-		abb.preorden();
-		System.out.println("Inorden ");
-		System.out.println();
-		abb.inorden();
+		
+		try {
+			abb.insertarNodo(n3);
+			abb.insertarNodo(n9);
+			abb.insertarNodo(n7);
+			abb.insertarNodo(n8);
+			abb.insertarNodo(n6);
+			abb.insertarNodo(n4);
+			abb.insertarNodo(n10);
+			
+			System.out.println(abb.buscar(8));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+//		abb.preorden();
+//		System.out.println("Inorden ");
+//		System.out.println();
+//		abb.inorden();
 		
 		//System.out.println(alturaNodo(n1));
 		//System.out.println("Cantidad hojas= "+abb.cantidadHojas());
