@@ -1,6 +1,8 @@
 package arboles2;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Arbol <E extends Comparable>{
 	protected Nodo<E> raiz;
@@ -86,6 +88,74 @@ public class Arbol <E extends Comparable>{
 	}
 	
 	
+	///TAREA
+	public void amplitud(){
+		Nodo a = raiz;
+		Nodo aux;
+
+		if (a != null){
+			Queue<Nodo> cola= new LinkedList<Nodo>();
+			Queue<Nodo> colaAux= new LinkedList<Nodo>();
+			cola.add(a);
+			while (!cola.isEmpty()){
+				colaAux.add(aux=cola.poll());
+				if (aux.getHijoI() != null){
+					cola.add(aux.getHijoI());
+				}
+				if (aux.getHijoD()!= null){
+					cola.add(aux.getHijoD());
+				}
+			}
+			System.out.println(colaAux);
+		}
+	}
+	
+	public ArrayList convertirALista(String cadena) {
+		String[] lala = cadena.split(",");
+		ArrayList array = new ArrayList();
+		for (int i = 0; i < lala.length; i++) {
+			array.add(lala[i]);
+		}
+		return array;
+	}
+	
+	public Nodo<E> armarArbol(String preorden, String inorden) {
+		ArrayList<E> pre = convertirALista(preorden);
+		ArrayList<E> ino = convertirALista(inorden);
+		
+		Nodo<E> lala = armarArbolR(pre, ino, 0, pre.size() - 1, 0, ino.size() - 1);
+		return lala;
+
+	}
+
+	public Nodo<E> armarArbolR(ArrayList<E> preorden, ArrayList<E> inorden, int preordenInicio, int preordenFin,
+			int inordenInicio, int inordenFin) {
+
+		if (preordenInicio <= preordenFin || inordenInicio <= inordenFin) {
+
+			// Raiz
+			Nodo<E> raiz = new Nodo<E>(preorden.get(preordenInicio));
+
+			// Buscar raiz en inorden
+			int i = inordenInicio;
+			while (i < inorden.size() && inorden.get(i).compareTo(raiz.getllave()) != 0) {
+				i++;
+			}
+
+			// Asignación de hijos correspondientes
+			raiz.setHijoI(armarArbolR(preorden, inorden, preordenInicio + 1, preordenInicio + (i - inordenInicio),
+					inordenInicio, i - 1));
+			raiz.setHijoD(armarArbolR(preorden, inorden, preordenInicio + (i - inordenInicio) + 1, inordenFin, i + 1,
+					inordenFin));
+
+			return raiz;
+
+		} else {
+			return null;
+		}
+	}
+
+	
 
 	
 	
@@ -126,22 +196,24 @@ public class Arbol <E extends Comparable>{
 	
 	public static void main(String[] args){
 	
-		Nodo<Integer> n1 = new Nodo<Integer>(10);
-		Nodo<Integer> n2 = new Nodo<Integer>(7);
-		Nodo<Integer> n3 = new Nodo<Integer>(5);
-		Nodo<Integer> n4 = new Nodo<Integer>(19);
-		Nodo<Integer> n5 = new Nodo<Integer>(15);
-		Nodo<Integer> n6 = new Nodo<Integer>(120);
+		Nodo<Integer> n1 = new Nodo<Integer>(1);
+		Nodo<Integer> n2 = new Nodo<Integer>(2);
+		Nodo<Integer> n3 = new Nodo<Integer>(3);
+		Nodo<Integer> n4 = new Nodo<Integer>(4);
+		Nodo<Integer> n5 = new Nodo<Integer>(5);
+		Nodo<Integer> n6 = new Nodo<Integer>(6);
 
 		
 		n1.setHijoI(n2);
 		n2.setHijoI(n5);
-		n2.setHijoI(n3);
 		n2.setHijoD(n4);
 		n5.setHijoI(n6);
 
 		
 		Arbol<Integer> a=new Arbol<Integer>(n1);
+		
+		System.out.println("amplitud");
+		a.amplitud();
 		
 //		Nodo[] in = {n1,n3,n5,n4,n6,n2};
 //		Nodo[] pre ={n1,n5,n3,n2,n4,n6};
