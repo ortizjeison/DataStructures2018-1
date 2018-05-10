@@ -14,6 +14,8 @@ public class AVL<E extends Comparable<E>> extends ABB<E> {
 		}
 		return nodo;
 	}
+	
+
 
 	public Nodo<E> rotSimpleDer(Nodo<E> n) {
 		Nodo<E> izq = n.getHijoIzq();
@@ -41,13 +43,13 @@ public class AVL<E extends Comparable<E>> extends ABB<E> {
 		return rotSimpleIzq(n);
 	}
 
-	//
+
 	public void insertarNodo(Nodo<E> nodo) throws Exception {
 		super.insertarNodo(nodo.getLlave());
 		balancear(nodo);
 	}
 
-	// Comprobar si son los Dobles
+
 	public Nodo<E> balancear(Nodo<E> n) {
 		Nodo<E> desb = desbalance(n);
 		if (desb != null) {
@@ -85,15 +87,31 @@ public class AVL<E extends Comparable<E>> extends ABB<E> {
 		}
 	}
 	
-	public static void main(String[] args){
-		Nodo<Integer> raiz = new Nodo<Integer>(null);
+	public static void main(String[] args) throws Exception{
+		Nodo<Integer> n1 = new Nodo<Integer>(5);
+		Nodo<Integer> n2 = new Nodo<Integer>(3);
+		Nodo<Integer> n3 = new Nodo<Integer>(2);
+
 		
-		AVL<Integer> av = new AVL<Integer>(raiz);
+		AVL<Integer> av = new AVL<Integer>(n1);
 		
+		av.insertarNodo(n2);
+		av.insertarNodo(n3);
+		av.preorden();
+		System.out.println("Balanceo...");
+		av.balancear(n1);
+		av.preorden();
 		
+	
+		//
+	
+		n2.setLlave(9);
+		n3.setLlave(10);
 		
-		
-		
+		av.preorden();
+		System.out.println("Balanceo");
+		av.balancear(n1);
+		av.preorden();
 		
 	}
 }
