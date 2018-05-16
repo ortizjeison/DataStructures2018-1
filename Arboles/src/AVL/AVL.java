@@ -15,6 +15,7 @@ public class AVL<E extends Comparable<E>> extends ABB<E> {
 		return nodo;
 	}
 	
+	
 
 
 	public Nodo<E> rotSimpleDer(Nodo<E> n) {
@@ -87,26 +88,72 @@ public class AVL<E extends Comparable<E>> extends ABB<E> {
 		}
 	}
 	
+	public void delete(E llave) throws Exception {
+		Nodo<E> n = buscar(llave);
+		Nodo<E> padre = n.getPadre();
+		
+		if(n.getHijoDer()!=null && n.getHijoIzq()!=null) {
+			//Si tiene dos hijos:
+			padre = antecesorR(n).getPadre();
+		}
+		super.eliminarNodo(llave);
+		
+		if(padre==null) {
+			balancear(raiz);
+		}else {
+			while(padre!=null) {
+				balancear(padre);
+				padre=padre.getPadre();
+			}
+		}
+	}
+	
 	public static void main(String[] args) throws Exception{
-		Nodo<Integer> n1 = new Nodo<Integer>(5);
-		Nodo<Integer> n2 = new Nodo<Integer>(3);
-		Nodo<Integer> n3 = new Nodo<Integer>(2);
-
+		Nodo<Integer> n9 = new Nodo<Integer>(9);
+		Nodo<Integer> n10 = new Nodo<Integer>(10);
+		Nodo<Integer> n12 = new Nodo<Integer>(12);
+		Nodo<Integer> n13 = new Nodo<Integer>(13);
+		Nodo<Integer> n8 = new Nodo<Integer>(8);
+		Nodo<Integer> n3 = new Nodo<Integer>(3);
+		Nodo<Integer> n2 = new Nodo<Integer>(2);
+		Nodo<Integer> n6 = new Nodo<Integer>(6);
+		Nodo<Integer> n1 = new Nodo<Integer>(1);
+		Nodo<Integer> n5 = new Nodo<Integer>(5);
+		Nodo<Integer> n7 = new Nodo<Integer>(7);
+		Nodo<Integer> n4 = new Nodo<Integer>(4);
 		
-		AVL<Integer> av = new AVL<Integer>(n1);
 		
-		av.insertarNodo(n2);
+		
+		AVL<Integer> av = new AVL<Integer>(n8);
 		av.insertarNodo(n3);
+		av.insertarNodo(n12);
+		av.insertarNodo(n2);
+		av.insertarNodo(n9);
+		av.insertarNodo(n6);
+		av.insertarNodo(n13);
+		av.insertarNodo(n10);
+		av.insertarNodo(n1);
+		av.insertarNodo(n5);
+		av.insertarNodo(n7);
+		av.insertarNodo(n4);
+		
 		av.preorden();
-		System.out.println("Balanceo...");
-		av.balancear(n1);
+		
+		av.delete(n13.getLlave());
+		
+		System.out.println("DELETE 13:");
+		
 		av.preorden();
+		
+		
+		
+		
+//		System.out.println("Balanceo...");
+//		av.balancear(n1);
+//		av.preorden();
 		
 	
 		//
-	
-		n2.setLlave(9);
-		n3.setLlave(10);
 		
 		av.preorden();
 		System.out.println("Balanceo");

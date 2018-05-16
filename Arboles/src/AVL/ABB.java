@@ -1,5 +1,7 @@
 package AVL;
 
+import java.util.ArrayList;
+
 public class ABB<E extends Comparable<E>> extends Arbol<E> {
 
 	public ABB(Nodo<E> raiz) {
@@ -77,6 +79,28 @@ public class ABB<E extends Comparable<E>> extends Arbol<E> {
 			return antecesorR(nodo.getHijoIzq());
 		}
 	}
+	
+	public ArrayList<E> getNivel(int n){
+		if(n>=0) {
+			ArrayList<E> llaves = new ArrayList<E>();
+			getNivel(llaves,raiz,n);
+			return llaves;
+		}else {
+			return null;
+		}
+		
+	}
+	
+	public ArrayList<E> getNivel(ArrayList<E> llaves, Nodo<E> N, int n) {
+		if(n==0) {
+			llaves.add(N.getLlave());
+			return llaves;
+		}else {
+			getNivel(llaves,N.getHijoIzq(),n-1);
+			getNivel(llaves,N.getHijoDer(),n-1);
+		}
+		return llaves;
+	}
 
 	public void eliminarNodo(E llave) throws Exception {
 		raiz = eliminarR(llave, raiz);
@@ -149,22 +173,22 @@ public class ABB<E extends Comparable<E>> extends Arbol<E> {
 		return cantidadHojasR(raiz.getHijoDer()) + cantidadHojasR(raiz.getHijoIzq());
 	}
 
-	/*
-	 * public static void main(String[] args) { Nodo<Integer> n1 = null;
-	 * ABB<Integer> arbolito = new ABB<Integer>(n1);
-	 * 
-	 * try { arbolito.insertarNodo(12); arbolito.insertarNodo(6);
-	 * arbolito.insertarNodo(15); arbolito.insertarNodo(9);
-	 * arbolito.insertarNodo(7); arbolito.insertarNodo(3);
-	 * System.out.println("Preorden: "); arbolito.preorden(); //
-	 * System.out.println(arbolito.sucesor(arbolito.getRaiz())); //
-	 * arbolito.eliminarNodo(6); // System.out.println(arbolito.getRaiz());
-	 * System.out.println("Altura Nodo: ");
-	 * //System.out.println(arbolito.alturaNodo(12));
-	 * //System.out.println(arbolito.alturaArbol(arbolito)); } catch (Exception
-	 * e) { // TODO Auto-generated catch block
-	 * System.out.println(e.getMessage()); }
-	 * 
-	 * }
-	 */
+
+	 public static void main(String[] args) throws Exception {
+		 
+		Nodo<Integer> n1 = null;
+	 	ABB<Integer> arbolito = new ABB<Integer>(n1);
+	  
+	 
+	 	arbolito.insertarNodo(12); 
+		arbolito.insertarNodo(6);
+		arbolito.insertarNodo(15); 
+		arbolito.insertarNodo(9);
+		arbolito.insertarNodo(7); 
+		arbolito.insertarNodo(3);
+	  
+
+	  
+	  }
+
 }

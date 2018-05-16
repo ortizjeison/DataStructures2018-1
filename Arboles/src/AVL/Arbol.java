@@ -19,6 +19,9 @@ public class Arbol<E extends Comparable<E>> {
 		preorden(this.raiz);
 		System.out.println();
 	}
+	
+	
+	
 
 	public void preorden(Nodo<E> raiz) {
 		if (raiz == null) {
@@ -44,6 +47,11 @@ public class Arbol<E extends Comparable<E>> {
 			System.out.print(raiz.toString() + " ");
 		}
 	}
+	
+	
+	
+	
+	
 
 	public void inorden() {
 		inorden(this.raiz);
